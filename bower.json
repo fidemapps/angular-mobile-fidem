@@ -1,32 +1,28 @@
 {
-  "name": "angular-notification",
-  "main": "angular-notification.js",
-  "version": "0.2.3",
-  "homepage": "https://github.com/neoziro/angular-notification",
-  "authors": [
-    "Greg Bergé <neoziro@gmail.com>"
-  ],
-  "description": "Notification service for Angular using native HTML5 API.",
-  "keywords": [
-    "angular",
-    "notification",
-    "service"
-  ],
-  "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "package.json",
-    "karma.conf.js",
-    "node_modules",
-    "bower_components",
-    "Gruntfile.js",
-    "test",
-    "examples"
-  ],
-  "dependencies": {
-    "angular": "~1.2.14"
-  },
-  "devDependencies": {
-    "angular-mocks": "~1.2.14"
-  }
+    "name": "angular-fidem",
+    "main": "angular-fidem.js",
+    "version": "0.0.1",
+    "homepage": "https://bitbucket.org/fidem-team/angular-fidem/",
+    "authors": [
+        "Sébastien Guimont"
+    ],
+    "description": "TBD",
+    "keywords": [
+        "angular",
+        "service"
+    ],
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "package.json",
+        "node_modules",
+        "bower_components",
+        "Gruntfile.js"
+    ],
+    "dependencies": {
+        "angular": "~1.2.14"
+    },
+    "devDependencies": {
+        "angular-mocks": "~1.2.14"
+    }
 }

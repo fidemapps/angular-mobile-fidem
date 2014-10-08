@@ -3,27 +3,31 @@
 angular.module('angular-fidem').factory('FidemServices', ['$http', 'Settings', 'geolocation', function ($http, Settings, geolocation) {
     return {
         logAction: function (action) {
-            var logAction = action;
+
+            // Must be a kind of call or global option (optional) to be able to adjust the action before sending it
+            function adjustAction() {
+                action.member_id = (window.user) ? window.user.fidem_member_id : null;
+                action.session_id = (window.fidemSessionId) ? window.fidemSessionId : null;
+            }
+
+            function postAction() {
+                $http.post(Settings.services.url + '/api/gamification/actions', action, {
+                    headers: {
+                        'X-Fidem-AccessApiKey': Settings.services.accessApiKey}
+                });
+            }
 
             geolocation.getLocation().then(function (data) {
-                logAction.member_id = (window.user) ? window.user.fidem_member_id : null;
-                logAction.session_id = (window.fidemSessionId) ? window.fidemSessionId : null;
-                logAction.coordinates = { lat: data.coords.latitude, long: data.coords.longitude };
+                adjustAction();
 
-                $http.post(Settings.services.url + '/api/gamification/actions', logAction, {
-                    headers: {
-                        'X-Fidem-AccessApiKey': Settings.services.accessApiKey}
-                });
+                action.coordinates = { lat: data.coords.latitude, long: data.coords.longitude };
+
+                postAction();
             }, function (err) {
-                console.log(err);
-
-                logAction.member_id = (window.user) ? window.user.fidem_member_id : null;
-                logAction.session_id = (window.fidemSessionId) ? window.fidemSessionId : null;
-
-                $http.post(Settings.services.url + '/api/gamification/actions', logAction, {
-                    headers: {
-                        'X-Fidem-AccessApiKey': Settings.services.accessApiKey}
-                });
+                // FIXME: (SG) Must have a better way to detect the presence or not of geolocatiuon
+                // Fallback to standard call if no geolcation available
+                adjustAction();
+                postAction();
             });
         }
     };
