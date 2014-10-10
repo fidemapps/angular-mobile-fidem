@@ -11,3 +11,16 @@
 # Testing Endpoints
 
 http://services.fidemapps.com
+
+
+# Call Example
+
+```js
+FidemServices.logAction({
+    type: 'viewShow',
+    data: {
+        id: 'show1',
+        name: 'The Big Show'
+    }
+});
+```
