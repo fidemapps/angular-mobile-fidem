@@ -83,12 +83,7 @@
           var promise = $q.when(action);
 
           // Chain of interceptors.
-          var chain = [];
-
-          // Push interceptors to the chain.
-          angular.forEach(interceptors, function (interceptor) {
-            chain.push(interceptor);
-          });
+          var chain = [].concat(interceptors);
 
           // Push geoloc interceptor at the end.
           chain.push(geolocInterceptor);
@@ -114,6 +109,7 @@
          * GeoLocalisation interceptor.
          *
          * @param {object} action
+         * @returns {object|Promise}
          */
 
         function geolocInterceptor(action) {
