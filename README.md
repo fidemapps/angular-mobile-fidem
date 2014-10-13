@@ -1,15 +1,10 @@
-## Install
+# Angular fidem
 
-### Using bower
-
-```
-bower install angular-fidem
-```
+Angular service to interact with Fidem API.
 
 ## Usage
 
 ```js
-hello();
 ```
 
 ## License
