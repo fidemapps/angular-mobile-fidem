@@ -10,6 +10,7 @@ describe('Fidem provider', function () {
     interceptors = fidemProvider.interceptors;
 
     $provide.value('$window', {
+      config: 'myConfig',
       navigator: {}
     });
   }));
@@ -120,6 +121,26 @@ describe('Fidem provider', function () {
         foo: 'bar',
         coordinates: null,
         hooked: true
+      });
+
+      logAction(done);
+
+      $httpBackend.flush();
+    });
+
+    it('should be possible to inject something', function (done) {
+      interceptors.push(function (action, $injector) {
+        var $window = $injector.get('$window');
+        action.hooked = true;
+        action.config = $window.config;
+        return action;
+      });
+
+      expectRequest({
+        foo: 'bar',
+        coordinates: null,
+        hooked: true,
+        config: 'myConfig'
       });
 
       logAction(done);

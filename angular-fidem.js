@@ -62,8 +62,8 @@
      */
 
     this.$get = [
-      '$http', '$window', '$q', '$rootScope',
-      function ($http, $window, $q, $rootScope) {
+      '$http', '$window', '$q', '$rootScope', '$injector',
+      function ($http, $window, $q, $rootScope, $injector) {
         // Fidem service.
         var fidem = {};
 
@@ -94,9 +94,11 @@
           chain.push(geolocInterceptor);
 
           // Apply interceptors.
-          while (chain.length) {
-            promise = promise.then(chain.shift());
-          }
+          angular.forEach(chain, function (interceptor) {
+            promise = promise.then(function (action) {
+              return interceptor(action, $injector);
+            });
+          });
 
           // Post action.
           return promise.then(function (action) {
