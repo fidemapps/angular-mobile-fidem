@@ -16,9 +16,7 @@
    * Log action to Fidem API
    */
 
-  angular.module('fidem').provider('fidem', [
-    '$http', '$window', '$q', '$rootScope',
-    function ($http, $window, $q, $rootScope) {
+  angular.module('fidem', []).provider('fidem', function () {
 
     /**
      * Provider configuration.
@@ -57,90 +55,98 @@
      * Interceptors used to modify action before sending it.
      */
 
-    this.interceptors = [];
-
-    /**
-     * GeoLocalisation interceptor.
-     *
-     * @param {object} action
-     */
-
-    function geolocInterceptor(action) {
-      var deferred = $q.defer();
-
-      // If not supported, do nothing.
-      if (!$window.navigator || !$window.navigator.geolocation) return action;
-
-      $window.navigator.geolocation.getCurrentPosition(function success(position) {
-        // In case of success, we add coordinates to the action.
-        $rootScope.$apply(function () {
-          action.coordinates = {
-            lat: position.coords.latitude,
-            long: position.coords.longitude
-          };
-
-          deferred.resolve(action);
-        });
-      }, function error() {
-        // In case of error, we set coordinates to null.
-        $rootScope.$apply(function () {
-          action.coordinates = null;
-          deferred.resolve(action);
-        });
-      }, geolocOptions);
-    }
+    var interceptors = this.interceptors = [];
 
     /**
      * Fidem service getter.
      */
 
-    this.$get = function () {
-      // Fidem service.
-      var fidem = {};
+    this.$get = [
+      '$http', '$window', '$q', '$rootScope',
+      function ($http, $window, $q, $rootScope) {
+        // Fidem service.
+        var fidem = {};
 
-      /**
-       * Log an action.
-       *
-       * @example
-       *
-       * fidem.log({foo: 'bar'})
-       *
-       * @param {object} action Action to log
-       * @returns {Promise}
-       */
+        /**
+         * Log an action.
+         *
+         * @example
+         *
+         * fidem.log({foo: 'bar'})
+         *
+         * @param {object} action Action to log
+         * @returns {Promise}
+         */
 
-      fidem.log = function (action) {
-        // Convert action to a promise.
-        var promise = $q.when(action);
+        fidem.log = function (action) {
+          // Convert action to a promise.
+          var promise = $q.when(action);
 
-        // Chain of interceptors.
-        var chain = [];
+          // Chain of interceptors.
+          var chain = [];
 
-        // Push interceptors to the chain.
-        angular.forEach(this.interceptors, function (interceptor) {
-          chain.push(interceptor);
-        });
+          // Push interceptors to the chain.
+          angular.forEach(interceptors, function (interceptor) {
+            chain.push(interceptor);
+          });
 
-        // Push geoloc interceptor at the end.
-        chain.push(geolocInterceptor(action));
+          // Push geoloc interceptor at the end.
+          chain.push(geolocInterceptor);
 
-        // Apply interceptors.
-        while (chain.length) {
-          promise = promise.then(chain.shift());
+          // Apply interceptors.
+          while (chain.length) {
+            promise = promise.then(chain.shift());
+          }
+
+          // Post action.
+          return promise.then(function (action) {
+            return $http.post(config.endpoint + '/api/gamification/actions', action, {
+              headers: {
+                'X-Fidem-AccessApiKey': config.key
+              }
+            });
+          });
+        };
+
+        /**
+         * GeoLocalisation interceptor.
+         *
+         * @param {object} action
+         */
+
+        function geolocInterceptor(action) {
+          // If not supported, do nothing.
+          if (!$window.navigator || !$window.navigator.geolocation) {
+            action.coordinates = null;
+            return action;
+          }
+
+          var deferred = $q.defer();
+
+          $window.navigator.geolocation.getCurrentPosition(function success(position) {
+            // In case of success, we add coordinates to the action.
+            $rootScope.$apply(function () {
+              action.coordinates = {
+                lat: position.coords.latitude,
+                long: position.coords.longitude
+              };
+
+              deferred.resolve(action);
+            });
+          }, function error() {
+            // In case of error, we set coordinates to null.
+            $rootScope.$apply(function () {
+              action.coordinates = null;
+              deferred.resolve(action);
+            });
+          }, geolocOptions);
+
+          return deferred.promise;
         }
 
-        // Post action.
-        return promise.then(function (action) {
-          return $http.post(config.endpoint + '/api/gamification/actions', action, {
-            headers: {
-              'X-Fidem-AccessApiKey': config.key
-            }
-          });
-        });
-      };
-
-      return fidem;
-    };
-  }]);
+        return fidem;
+      }
+    ];
+  });
 
 })(window, window.angular);
