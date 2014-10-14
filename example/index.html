@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <div ng-controller="AppCtrl">
+      <button type="button" ng-click="logAction()">Log action</button>
+      <h2>Result</h2>
+      <div class="type">{{type}}</div>
+      <div class="result">{{result}}</div>
+    </div>
+
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../angular-fidem.js"></script>
+    <script>
+      angular.module('app', ['fidem'])
+      .config(function (fidemProvider) {
+        fidemProvider.setApiEndpoint('http://services.fidemapps.com');
+        fidemProvider.setApiKey('myApiKey');
+      })
+      .controller('AppCtrl', function (fidem, $scope) {
+        $scope.logAction = function () {
+          fidem.log({
+            type: 'viewShow',
+            data: {
+              id: 'show1',
+              name: 'The Big Show'
+            }
+          })
+          .then(function (result) {
+            $scope.type = 'success';
+            $scope.result = result;
+          })
+          .catch(function (result) {
+            $scope.type = 'error';
+            $scope.result = result;
+          });
+        };
+      });
+    </script>
+  </body>
+</html>
