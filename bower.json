@@ -1,7 +1,7 @@
 {
   "name": "angular-fidem",
   "main": "angular-fidem.js",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "homepage": "https://bitbucket.org/fidem-team/angular-fidem/",
   "authors": [
     "Sébastien Guimont",

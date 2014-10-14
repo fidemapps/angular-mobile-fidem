@@ -1,4 +1,4 @@
-/*! Angular fidem v0.0.0 | © 2014 Fidem | License MIT */
+/*! Angular fidem v0.1.0 | © 2014 Fidem | License MIT */
 (function (window, angular, undefined) {'use strict';
 
   /**
