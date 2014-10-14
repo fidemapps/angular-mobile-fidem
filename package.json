@@ -7,6 +7,10 @@
     "type": "git",
     "url": "git@bitbucket.org:fidem-team/angular-fidem.git"
   },
+  "scripts": {
+    "test": "./node_modules/karma/bin/karma start --single-run",
+    "install": "bower install"
+  },
   "keywords": [
     "angular",
     "service",
