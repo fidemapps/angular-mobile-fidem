@@ -1,5 +1,7 @@
 # Angular fidem
 
+[ ![Codeship Status for fidem-team/angular-fidem](https://codeship.io/projects/f4b0dd80-35d9-0132-1c4b-729df96ac6df/status)](https://codeship.io/projects/41210)
+
 Angular service to interact with Fidem API.
 
 ## Install
