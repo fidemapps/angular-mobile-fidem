@@ -1,6 +1,6 @@
 # Angular fidem
 
-[ ![Codeship Status for fidem-team/angular-fidem](https://codeship.io/projects/f4b0dd80-35d9-0132-1c4b-729df96ac6df/status)](https://codeship.io/projects/41210)
+[ ![Codeship Status for sguimont/angular-fidem](https://www.codeship.io/projects/2f3ccfe0-36a1-0132-5705-2a2ee4030446/status?branch=master)](https://www.codeship.io/projects/41452)
 
 Angular service to interact with Fidem API.
 
