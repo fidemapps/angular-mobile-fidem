@@ -12,12 +12,13 @@
     </div>
 
     <script src="../bower_components/angular/angular.js"></script>
-    <script src="../angular-fidem.js"></script>
+    <script src="../angular-mobile-fidem.js"></script>
     <script>
       angular.module('app', ['fidem'])
       .config(function (fidemProvider) {
         fidemProvider.setApiEndpoint('http://services.fidemapps.com');
         fidemProvider.setApiKey('myApiKey');
+        fidemProvider.setSecretKey('mySecretKey');
       })
       .controller('AppCtrl', function (fidem, $scope) {
         $scope.logAction = function () {

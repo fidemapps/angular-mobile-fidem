@@ -1,6 +1,4 @@
-# Angular fidem
-
-[ ![Codeship Status for sguimont/angular-fidem](https://www.codeship.io/projects/2f3ccfe0-36a1-0132-5705-2a2ee4030446/status?branch=master)](https://www.codeship.io/projects/41452)
+# Angular Mobile Fidem
 
 Angular service to interact with Fidem API.
 
@@ -9,7 +7,7 @@ Angular service to interact with Fidem API.
 ### Using bower
 
 ```js
-bower install angular-fidem
+bower install angular-mobile-fidem
 ```
 
 ## Usage
@@ -21,6 +19,7 @@ angular.module('app', ['fidem'])
   fidemProvider
   .setApiEndpoint('http://services.fidemapps.com')
   .setApiKey('yourApiKey');
+  .setSecretKey('yourSecretKey');
 })
 .controller('AppCtrl', function (fidem) {
   // Log an action.

@@ -7,6 +7,7 @@ describe('Fidem provider', function () {
   beforeEach(module('fidem', function (fidemProvider, $provide) {
     fidemProvider.setApiEndpoint('http://services.fidemapps.com');
     fidemProvider.setApiKey('myApiKey');
+    fidemProvider.setSecretKey('mySecretKey');
     interceptors = fidemProvider.interceptors;
 
     $provide.value('$window', {

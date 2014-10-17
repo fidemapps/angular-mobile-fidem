@@ -5,11 +5,11 @@ module.exports = function (grunt) {
             default: {
                 options: {
                     preserveComments: 'some',
-                    sourceMap: 'angular-fidem.min.map',
-                    sourceMappingURL: 'angular-fidem.min.map'
+                    sourceMap: 'angular-mobile-fidem.min.map',
+                    sourceMappingURL: 'angular-mobile-fidem.min.map'
                 },
                 files: {
-                    'angular-fidem.min.js': 'angular-fidem.js'
+                    'angular-fidem.min.js': 'angular-mobile-fidem.js'
                 }
             }
         }

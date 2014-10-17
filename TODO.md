@@ -2,8 +2,8 @@
 
 * Réviser le texte du README.md
 
-# Note pour bower
-bower register angular-fidem git://github.com/sguimont/angular-fidem.git
-TAG pour les versions : le nom du tag tu mets soit 1.0.0, soit v1.0.0
-Ajouter les js min avant de faire le tag
+# Bower
 
+bower register angular-fidem git://github.com/sguimont/angular-mobile-fidem.git
+
+Ajouter les js min avant de faire le tag

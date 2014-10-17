@@ -1,13 +1,13 @@
 {
-  "name": "angular-fidem",
-  "main": "angular-fidem.js",
-  "version": "0.1.0",
-  "homepage": "https://bitbucket.org/fidem-team/angular-fidem/",
+  "name": "angular-mobile-fidem",
+  "main": "angular-mobile-fidem.js",
+  "version": "0.0.0",
+  "homepage": "https://github.com/sguimont/angular-mobile-fidem/",
   "authors": [
     "Sébastien Guimont",
     "Greg Bergé"
   ],
-  "description": "Angular service to interact with Fidem API.",
+  "description": "Angular service to interact with Fidem API from a hybrid mobile application like ionic.",
   "keywords": [
     "angular",
     "service",

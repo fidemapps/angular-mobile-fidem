@@ -1,11 +1,11 @@
 {
-  "name": "angular-fidem",
-  "version": "0.1.0",
-  "description": "Angular service to interact with Fidem API.",
-  "main": "angular-fidem.js",
+  "name": "angular-mobile-fidem",
+  "version": "0.0.0",
+  "description": "Angular service to interact with Fidem API from a hybrid mobile application like ionic.",
+  "main": "angular-mobile-fidem.js",
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:fidem-team/angular-fidem.git"
+    "url": "git@github.com:sguimont/angular-mobile-fidem.git"
   },
   "scripts": {
     "test": "./node_modules/karma/bin/karma start --single-run",
