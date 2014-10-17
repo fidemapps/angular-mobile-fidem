@@ -4,7 +4,6 @@
   /**
    * GeoLocalisation options.
    */
-
   var geolocOptions = {
     enableHighAccuracy: true,
     timeout: 3000,
@@ -15,16 +14,15 @@
    * Fidem provider.
    * Log action to Fidem API
    */
-
   angular.module('fidem', []).provider('fidem', function () {
 
     /**
      * Provider configuration.
      */
-
     var config = {
       endpoint: null,
-      key: null
+      key: null,
+      secret: null
     };
 
     /**
@@ -33,7 +31,6 @@
      * @param {string} endpoint
      * @returns {fidemProvider}
      */
-
     this.setApiEndpoint = function (endpoint) {
       config.endpoint = endpoint;
       return this;
@@ -45,22 +42,34 @@
      * @param {string} key
      * @returns {fidemProvider}
      */
-
     this.setApiKey = function (key) {
       config.key = key;
       return this;
     };
 
     /**
+     * Define secret key.
+     *
+     * @param {string} secret
+     * @returns {fidemProvider}
+     */
+    this.setSecretKey = function (secret) {
+      config.secret = secret;
+      return this;
+    };
+
+
+
+
+
+    /**
      * Interceptors used to modify action before sending it.
      */
-
     var interceptors = this.interceptors = [];
 
     /**
      * Fidem service getter.
      */
-
     this.$get = [
       '$http', '$window', '$q', '$rootScope', '$injector',
       function ($http, $window, $q, $rootScope, $injector) {
