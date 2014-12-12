@@ -5,7 +5,7 @@
   "main": "angular-mobile-fidem.js",
   "repository": {
     "type": "git",
-    "url": "git@github.com:sguimont/angular-mobile-fidem.git"
+    "url": "git@github.com:fidemapps/angular-mobile-fidem.git"
   },
   "scripts": {
     "test": "./node_modules/karma/bin/karma start --single-run",
